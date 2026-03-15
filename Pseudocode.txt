@@ -1,0 +1,47 @@
+START
+
+Declare string variable userInput
+
+Prompt the user to enter text
+Store the input in userInput
+
+CALL appendToFile(userInput)
+
+CALL reverseFile()
+
+Display message "Program completed successfully"
+
+END
+
+
+FUNCTION appendToFile(text)
+
+Open CSC450_CT5_mod5.txt in append mode
+
+IF file opens successfully
+    Write text to file
+    Close file
+ELSE
+    Display error message
+END IF
+
+END FUNCTION
+
+
+FUNCTION reverseFile()
+
+Open CSC450_CT5_mod5.txt for reading
+
+Read contents of file into a string variable
+
+Close file
+
+Reverse all characters in the string
+
+Open CSC450-mod5-reverse.txt for writing
+
+Write reversed string to file
+
+Close file
+
+END FUNCTION

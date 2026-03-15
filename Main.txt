@@ -1,0 +1,87 @@
+// CSC450 Programming III
+// Module 5 Assignment
+// This program:
+// 1. Accepts user input
+// 2. Appends the input to CSC450_CT5_mod5.txt
+// 3. Reverses the contents of the file
+// 4. Writes the reversed contents to CSC450-mod5-reverse.txt
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+// Function to append user input to the file
+void appendToFile(string text)
+{
+    ofstream outFile("CSC450_CT5_mod5.txt", ios::app);
+
+    if (outFile.is_open())
+    {
+        outFile << text << endl;
+        outFile.close();
+        cout << "Input successfully appended to the file." << endl;
+    }
+    else
+    {
+        cout << "Error: Unable to open file for writing." << endl;
+    }
+}
+
+// Function to reverse file contents and store in a new file
+void reverseFile()
+{
+    ifstream inFile("CSC450_CT5_mod5.txt");
+    string fileContent = "";
+    string line;
+
+    if (inFile.is_open())
+    {
+        while (getline(inFile, line))
+        {
+            fileContent += line + "\n";
+        }
+        inFile.close();
+    }
+    else
+    {
+        cout << "Error: Unable to open file for reading." << endl;
+        return;
+    }
+
+    // Reverse all characters
+    reverse(fileContent.begin(), fileContent.end());
+
+    ofstream reverseFile("CSC450-mod5-reverse.txt");
+
+    if (reverseFile.is_open())
+    {
+        reverseFile << fileContent;
+        reverseFile.close();
+        cout << "Reversed content written to CSC450-mod5-reverse.txt" << endl;
+    }
+    else
+    {
+        cout << "Error: Unable to create reverse file." << endl;
+    }
+}
+
+int main()
+{
+    string userInput;
+
+    cout << "Enter text to append to the file: ";
+    getline(cin, userInput);
+
+    // Call function to append text
+    appendToFile(userInput);
+
+    // Call function to reverse file contents
+    reverseFile();
+
+    cout << "Program completed successfully." << endl;
+
+    return 0;
+}
